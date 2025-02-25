@@ -1,0 +1,3 @@
+wget https://vscode.download.prss.microsoft.com/dbazure/download/stable/e54c774e0add60467559eb0d1e229c6452cf8447/code_1.97.2-1739406807_amd64.deb
+sudo apt install ./code_1.97.2-1739406807_amd64.deb
+rm code_1.97.2-1739406807_amd64.deb

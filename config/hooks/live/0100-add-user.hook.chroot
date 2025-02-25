@@ -1,0 +1,3 @@
+set -e
+useradd -m -s /bin/bash student
+echo "student:pie" | chpasswd
