@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=MARS
+Comment=MARS - MIPS Assembler and Runtime Simulator
+Exec=java -jar /opt/mars/mars.jar
+Icon=/opt/mars/mars.png
+Terminal=false
+Type=Application
+Categories=TextEditor;Development;IDE;
+MimeType=text/x-asm;
+
