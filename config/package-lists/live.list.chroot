@@ -2,9 +2,3 @@ live-boot
 live-config
 live-config-systemd
 systemd-sysv
-gpg
-wget
-curl
-htop
-neofetch
-vim

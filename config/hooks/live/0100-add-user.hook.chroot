@@ -1,8 +1,6 @@
-#!/bin/sh
-
 set -e
-
 useradd -m -s /bin/bash student
 echo "student:pie" | chpasswd
+
 useradd -m -G sudo -s /bin/bash admin
 echo "admin:admin" | chpasswd
