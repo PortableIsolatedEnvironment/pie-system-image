@@ -2,3 +2,5 @@ network-manager
 wireless-tools
 wpasupplicant
 xfce4-indicator-plugin
+iptables
+dnsutils
