@@ -1,0 +1,12 @@
+[Unit]
+Description=Configurar firewall com whitelist dinâmica
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/setup-firewall.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+

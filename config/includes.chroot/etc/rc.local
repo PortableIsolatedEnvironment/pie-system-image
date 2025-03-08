@@ -1,4 +1,5 @@
 #!/bin/bash
 /usr/local/bin/setup-wifi.sh
+/usr/local/bin/setup-firewall.sh
 exit 0
 
