@@ -4,3 +4,20 @@ echo "student:pie" | chpasswd
 
 useradd -m -G sudo -s /bin/bash admin
 echo "admin:admin" | chpasswd
+
+#loginctl enable-linger student
+mkdir -p /var/lib/systemd/linger
+touch /var/lib/systemd/linger/student
+
+mkdir -p /home/student/.config/systemd/user
+
+cp -r /etc/skel/.config/systemd/user /home/student/.config/systemd/user
+chown -R student:student /home/student/.config
+
+mkdir -p /home/student/.config/systemd/user/default.target.wants
+
+ln -s /home/student/.config/systemd/user/user-devapp.service /home/student/.config/systemd/user/default.target.wants/
+
+
+#groupadd -r autologin || true
+#usermod -aG autologin student
