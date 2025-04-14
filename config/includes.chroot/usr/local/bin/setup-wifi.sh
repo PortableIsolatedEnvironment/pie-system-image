@@ -1,7 +1,7 @@
 #!/bin/bash
 
-WIFI_SSID="ssid wifi"
-WIFI_PSK="password"
+WIFI_SSID=""
+WIFI_PSK=""
 
 UUID=$(uuidgen)
 

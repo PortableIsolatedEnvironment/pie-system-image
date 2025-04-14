@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 WHITELIST_FILE="/etc/iptables/whitelist.txt"
 
 ip=$(cat /etc/pie-devapp/config.json | python3 -c "import sys, json; print(json.load(sys.stdin)['apiBaseUrl'])" | awk -F'//' '{print $2}' | awk -F':' '{print $1}')

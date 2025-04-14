@@ -1,0 +1,13 @@
+[Unit]
+Description=Start Firefox to generate profile
+After=mitmproxy.service
+Requires=mitmproxy.service
+
+[Service]
+ExecStart=/usr/local/bin/start-firefox.sh
+Type=oneshot
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target
+

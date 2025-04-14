@@ -11,6 +11,7 @@ StartLimitBurst=5
 ExecStart=/opt/devapp/devapp
 WorkingDirectory=/opt/devapp
 User=student
+Group=devapp
 Restart=always
 Environment=DISPLAY=:0
 Environment=XDG_RUNTIME_DIR=/run/user/1000
