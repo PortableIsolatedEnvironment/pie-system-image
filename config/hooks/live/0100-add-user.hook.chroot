@@ -26,20 +26,6 @@ Name=mitmproxy Background Init
 Comment=Start mitmproxy in background to create .mitmproxy
 EOF
 
-cat <<EOF > /home/student/.config/autostart/set-wallpaper.desktop
-[Desktop Entry]
-Type=Application
-Exec=sh -c 'sleep 5 && xfconf-query --channel xfce4-desktop --property \$(xfconf-query --channel xfce4-desktop --list | grep workspace0/last-image) --set /usr/share/images/wallpapers/Image.png'
-Hidden=false
-NoDisplay=false
-X-GNOME-Autostart-enabled=true
-Name=Background Init
-Comment=Change Wallpaper
-EOF
-
-
-
-chmod +x /home/student/.config/autostart/set-wallpaper.desktop
 chmod +x /home/student/.config/autostart/mitmproxy-start.desktop
 chmod +x /home/student/.config/autostart/firefox-start.desktop
 chown -R student:student /home/student/.config
