@@ -3,9 +3,8 @@ Description=Start mitmproxy once to generate cert
 After=network.target
 
 [Service]
-ExecStart=/usr/local/bin/start-mitmproxy.sh
+ExecStart=/usr/local/bin/init-mitmproxy.sh
 Type=oneshot
-RemainAfterExit=true
 
 [Install]
 WantedBy=multi-user.target
