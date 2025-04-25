@@ -1,5 +1,0 @@
-
-# Add group devapp to app
-chown root:devapp /opt/devapp/devapp
-
-chmod 2755 /opt/devapp/devapp

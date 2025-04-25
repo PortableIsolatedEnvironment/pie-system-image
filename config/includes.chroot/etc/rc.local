@@ -1,5 +1,8 @@
-#!/bin/bash
+#/bin/bash
 /usr/local/bin/setup-wifi.sh
-/usr/local/bin/setup-firewall.sh
+
+chown root:devapp /var/log/bash_commands.log
+chmod 664 /var/log/bash_commands.log
+
 exit 0
 

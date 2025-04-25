@@ -1,24 +1,29 @@
 #!/bin/bash
 
-USER_NAME="student"
-USER_HOME="/home/$USER_NAME"
-CERT_PATH="$USER_HOME/.mitmproxy/mitmproxy-ca-cert.pem"
-FIREFOX_DIR="$USER_HOME/.mozilla/firefox"
+echo "Script iniciado: $(date)" >> /tmp/inject-certs.log
+sleep 5
 
-command -v certutil >/dev/null 2>&1 || { echo "certutil não está instalado."; exit 1; }
+sleep 5 
+echo "Injetando certificados..." >> /tmp/inject.log
 
-if [ -d "$FIREFOX_DIR" ]; then
-    if [ -f "$FIREFOX_DIR/profiles.ini" ]; then
-        profiles=$(awk -F= '/^Path=/{print $2}' "$FIREFOX_DIR/profiles.ini")
-        for profile in $profiles; do
-            PROFILE_PATH="$FIREFOX_DIR/$profile"
-            echo "Adicionar certificado ao perfil: $PROFILE_PATH"
-            runuser -l "$USER_NAME" -c "certutil -A -n 'mitmproxy' -t 'C,,' -i '$CERT_PATH' -d sql:'$PROFILE_PATH'"
+
+
+# Path to mitmproxy certificate
+CERT_PATH=~/.mitmproxy/mitmproxy-ca-cert.pem
+
+# Check if the profiles directory exists (indicating Firefox has been run before)
+if [ -d ~/.mozilla/firefox ]; then
+    # Check if the profiles.ini file exists (it will be created after the first run)
+    if [ -f ~/.mozilla/firefox/profiles.ini ]; then
+        # Loop over all profile directories in firefox
+        for profile in ~/.mozilla/firefox/*.default*; do
+            # Add mitmproxy certificate to each profile
+            certutil -A -n "mitmproxy" -t "C,," -i "$CERT_PATH" -d sql:"$profile"
         done
+        echo "Mitmproxy certificate added to Firefox profiles."
     else
-        echo "File profiles.ini não encontrado."
+        echo "Profiles not created yet, Firefox has not been run."
     fi
 else
-    echo "diretorio do Firefox não encontrado."
+    echo "Firefox profiles directory does not exist. Firefox has not been run."
 fi
-

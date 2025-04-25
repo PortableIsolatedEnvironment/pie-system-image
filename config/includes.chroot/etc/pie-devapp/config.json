@@ -1,7 +1,7 @@
 {
 	"deviceId": 1,
-	"apiBaseUrl": "http://10.42.0.1:8000",
+	"apiBaseUrl": "http://192.168.216.61:8000",
 	"examDirectory": "/home/student/Desktop/Exam",
-	"whitelistFile": "/etc/iptables/whitelist.txt"
+	"whitelistFile": "/etc/iptables/whitelist.txt",
+	"logsDirectory": "/var/log/pie-devapp"
 }
-
