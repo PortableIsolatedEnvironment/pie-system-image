@@ -11,10 +11,13 @@ print(f"Using whitelist file at: {WHITELIST_FILE}")
 WHITELIST_DOMAINS = {
     "idp.ua.pt",
     "static.ua.pt",
+    "elearning.ua.pt/mod/resource/",
 }
 
 MANUAL_WHITELIST_URLS = {
     "https://elearning.ua.pt/Shibboleth.sso/SAML2/POST",
+    "https://elearning.ua.pt/login/index.php",
+    "https://elearning.ua.pt/auth/shibboleth/index.php",
 }
 
 LOADED_WHITELIST_URLS = set(MANUAL_WHITELIST_URLS)
