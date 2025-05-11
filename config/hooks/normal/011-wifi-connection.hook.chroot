@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Parâmetros fixos (podes adaptar ou tornar dinâmicos com variáveis/env)
-SSID="M23CampFire"
-PSK="12345678"
+SSID=""
+PSK=""
 UUID=$(uuidgen)
 
 mkdir -p /etc/NetworkManager/system-connections

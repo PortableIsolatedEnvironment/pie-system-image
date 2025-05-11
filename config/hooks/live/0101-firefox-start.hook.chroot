@@ -1,0 +1,13 @@
+cat <<EOF > /home/student/.config/autostart/firefox-start.desktop
+[Desktop Entry]
+Type=Application
+Exec=sh -c "firefox --headless & sleep 5 && pkill firefox"
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name=Firefox Background Init
+Comment=Start Firefox in background to create .mozilla
+EOF
+
+chmod +x /home/student/.config/autostart/firefox-start.desktop
+chown -R student:student /home/student/.config/autostart/firefox-start.desktop

@@ -5,7 +5,7 @@ USER_DIRS_FILE="/etc/skel/.config/user-dirs.dirs"
 mkdir -p /etc/skel/.config
 
 if [ ! -f "$USER_DIRS_FILE" ]; then
-    echo 'XDG_DESKTOP_DIR="$HOME/Área de Trabalho"' > "$USER_DIRS_FILE"
+    echo 'XDG_DESKTOP_DIR="$HOME/Desktop"' > "$USER_DIRS_FILE"
 fi
 
 DESKTOP_DIR=$(grep 'XDG_DESKTOP_DIR' "$USER_DIRS_FILE" | cut -d '"' -f2)

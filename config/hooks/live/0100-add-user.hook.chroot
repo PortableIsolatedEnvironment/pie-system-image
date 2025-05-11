@@ -4,30 +4,6 @@ echo "student:pie" | chpasswd
 
 mkdir -p /home/student/.config/autostart
 
-cat <<EOF > /home/student/.config/autostart/firefox-start.desktop
-[Desktop Entry]
-Type=Application
-Exec=sh -c "firefox --headless & sleep 5 && pkill firefox"
-Hidden=false
-NoDisplay=false
-X-GNOME-Autostart-enabled=true
-Name=Firefox Background Init
-Comment=Start Firefox in background to create .mozilla
-EOF
-
-cat <<EOF > /home/student/.config/autostart/mitmproxy-start.desktop
-[Desktop Entry]
-Type=Application
-Exec=bash -c "mitmdump > /dev/null & PID=$!; sleep 2; kill $PID"
-Hidden=false
-NoDisplay=false
-X-GNOME-Autostart-enabled=true
-Name=mitmproxy Background Init
-Comment=Start mitmproxy in background to create .mitmproxy
-EOF
-
-chmod +x /home/student/.config/autostart/mitmproxy-start.desktop
-chmod +x /home/student/.config/autostart/firefox-start.desktop
 chown -R student:student /home/student/.config
 
 useradd -m -G sudo,adm -s /bin/bash admin
