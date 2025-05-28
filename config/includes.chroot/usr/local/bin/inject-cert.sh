@@ -1,29 +1,47 @@
 #!/bin/bash
 
-echo "Script iniciado: $(date)" >> /tmp/inject-certs.log
-sleep 5
+LOG="/tmp/inject-certs.log"
+echo "Script iniciado: $(date)" >> "$LOG"
 
-sleep 5 
-echo "Injetando certificados..." >> /tmp/inject.log
+sleep 10
 
+# Inicia o mitmdump só para gerar o certificado
+mitmdump >/dev/null 2>&1 &
+MITM_PID=$!
 
+# Espera pelo ficheiro do certificado mitmproxy
+CERT_PATH="/home/student/.mitmproxy/mitmproxy-ca-cert.pem"
+for i in {1..20}; do
+    if [ -f "$CERT_PATH" ]; then
+        echo "Certificado encontrado em $CERT_PATH" >> "$LOG"
+        break
+    fi
+    echo "Aguardando certificado..." >> "$LOG"
+    sleep 1
+done
 
-# Path to mitmproxy certificate
-CERT_PATH=~/.mitmproxy/mitmproxy-ca-cert.pem
+# Termina o mitmdump
+kill $MITM_PID
 
-# Check if the profiles directory exists (indicating Firefox has been run before)
-if [ -d ~/.mozilla/firefox ]; then
-    # Check if the profiles.ini file exists (it will be created after the first run)
-    if [ -f ~/.mozilla/firefox/profiles.ini ]; then
-        # Loop over all profile directories in firefox
-        for profile in ~/.mozilla/firefox/*.default*; do
-            # Add mitmproxy certificate to each profile
+if [ ! -f "$CERT_PATH" ]; then
+    echo "Certificado não encontrado. Abortando." >> "$LOG"
+    exit 1
+fi
+
+HOME_USER=/home/student
+
+if [ -d "$HOME_USER/.mozilla/firefox" ]; then
+    if [ -f "$HOME_USER/.mozilla/firefox/profiles.ini" ]; then
+        for profile in "$HOME_USER"/.mozilla/firefox/*.default*; do
             certutil -A -n "mitmproxy" -t "C,," -i "$CERT_PATH" -d sql:"$profile"
         done
-        echo "Mitmproxy certificate added to Firefox profiles."
+        echo "Certificado mitmproxy adicionado aos perfis." >> "$LOG"
     else
-        echo "Profiles not created yet, Firefox has not been run."
+        echo "profiles.ini não existe. Firefox ainda não foi executado." >> "$LOG"
     fi
 else
-    echo "Firefox profiles directory does not exist. Firefox has not been run."
+    echo "Diretório de perfis do Firefox não existe." >> "$LOG"
 fi
+
+
+mitmdump -p 8081 -s /usr/local/bin/whitelist.py

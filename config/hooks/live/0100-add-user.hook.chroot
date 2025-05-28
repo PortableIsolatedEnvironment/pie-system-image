@@ -2,9 +2,6 @@ set -e
 useradd -m -s /bin/bash student
 echo "student:pie" | chpasswd
 
-mkdir -p /home/student/.config/autostart
-
-chown -R student:student /home/student/.config
 
 useradd -m -G sudo,adm -s /bin/bash admin
 echo "admin:admin" | chpasswd

@@ -1,9 +1,8 @@
 #!/bin/bash
+# Script para forçar criação do perfil .mozilla
 
-sleep 10
-sudo -u student firefox --headless &
-sleep 5
-sudo -u student pkill firefox
+if [ ! -d "/home/student/.mozilla" ]; then
+  firefox --headless
+  rm -f "/home/student/screenshot.png"
+fi
 
-# Evita execução futura
-rm -f /etc/systemd/system/init-firefox.service
